@@ -43,27 +43,32 @@ def user_view_profile():
 	return render_template('user_view_profile.html',data=data)
 
 
-@user.route('/user_view_doctor',methods=['get','post'])
+@user.route('/user_view_doctor', methods=['GET', 'POST'])
 def user_view_doctor():
-	data={}
-	if "search" in request.form:
-		p=request.form['product']+'%'
-		q="SELECT * FROM doctor INNER JOIN `department` on department.department_id=doctor.dept_id  WHERE fname LIKE '%s' and status='active'"%(p)
-		res=select(q)
-		data['tr']=res
-		
-		
+    data = {}
 
-	else:
+    # Default query to fetch all active doctors
+    q = """
+        SELECT doctor.*, department.department 
+        FROM doctor
+        INNER JOIN department ON department.department_id = doctor.dept_id
+        WHERE doctor.status = 'active'
+    """
 
-		q="SELECT * FROM doctor INNER JOIN `department` on department.department_id=doctor.dept_id where status='active'"
-		res=select(q)
-		data['tr']=res
-		print(q)
-		print(res)
+    if "search" in request.form:
+        search_query = request.form.get('search_query', '').strip()
 
-	return render_template('user_view_doctor.html',data=data)
+        # Search by department and location
+        if search_query:
+            q += """ AND (
+                        department.department LIKE '%%%s%%' OR 
+                        doctor.place LIKE '%%%s%%'
+                    )""" % (search_query, search_query)
 
+    res = select(q)
+    data['tr'] = res
+
+    return render_template('user_view_doctor.html', data=data)
 
 
 
