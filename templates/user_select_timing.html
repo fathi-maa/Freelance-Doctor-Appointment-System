@@ -26,13 +26,19 @@
 		<h3>Available Times</h3>
 		<table>
 			
-				<tr>
+			<tr>
 				<th></th>
 				{% for i in data['s'] %}
-				<td><input type="submit" class="btn btn-outline-success" name="time" value="{{i}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-
+				<td>
+					{% if i in data['booked'] %}
+						<button type="button" class="btn btn-danger" disabled>{{ i }}</button>
+					{% else %}
+						<input type="submit" class="btn btn-outline-success" name="time" value="{{ i }}">
+					{% endif %}
+				</td>
 				{% endfor %}
 			</tr>
+			
 		</table>
 	</form>
 </center>

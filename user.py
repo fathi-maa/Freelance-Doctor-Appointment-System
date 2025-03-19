@@ -111,12 +111,15 @@ def user_select_timing():
 				break
 		data['s']=s
 		print(s)
+		q = "SELECT atime FROM booking WHERE adate='%s'" % (date)
+		booked_slots = [row['atime'] for row in select(q)]
+		data['booked'] = booked_slots  # Store booked slots in data	
 
 
 	if 'time' in request.form:
 		date=request.form['date']
 		reason=request.form['reason']
-		time=request.form['date']
+		time=request.form['time']
 		q="select * from booking where adate='%s' and atime='%s'"%(date,time)
 		res=select(q)
 		if res:
