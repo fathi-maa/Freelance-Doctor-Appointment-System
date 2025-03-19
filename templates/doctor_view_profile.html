@@ -60,18 +60,18 @@
 {%else%}
 
 <center>
-	<h1>My Profile </h1>
+	<h1>My Profile </h1><br>
 	<table  class="table" style="width:300px">
 		{%for row in data['tr']%}
 		<tr>
 			
 		
-			<td><img style="margin-left: 50px" src="/{{row['image']}}" width="150" height="150"></td>
-		</tr>
-		<tr>
+			<img style="margin-left: 10px" src="/{{row['image']}}" width="150" height="150"></td><br>
+		</tr><br>
+		<tr style="padding-left: 100px;">
 			
-			<th>NAME :</th>
-			<td>{{row['fname']}} {{row['lname']}}</td>
+			<th >NAME :</th>
+			<td >{{row['fname']}} {{row['lname']}}</td>
 		</tr>
 		<tr>
 			<th>PLACE</th>
