@@ -40,7 +40,7 @@
             {%elif row['usertype']=="reject"%}
             <td><a href="?action=delete&id={{row['login_id']}}" class="btn btn-outline-danger">Delete</a></td> 
             {%else%}
-            <td>{{row['usertype']}}</td>
+            <td>{{row['status']}}</td>
             {%endif%}
 			 <td>{{row['date']}}</td>
 	
