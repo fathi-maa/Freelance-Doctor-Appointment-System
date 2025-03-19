@@ -83,10 +83,10 @@ def doctor_send_application():
 	if 'submit' in request.form:
 		date=request.form['date']
 		place=request.args['palce']
-		time=request.form['time']
+		pl=request.form['pl']
 		certi=request.form['img']
 		
-		q="insert into treatment values(null,'%s','%s','%s','%s','%s',curdate())"%(session['did'],date,place,time,certi)
+		q="insert into treatment values(null,'%s','%s','%s','%s','%s',curdate())"%(session['did'],date,place,pl,certi)
 		insert(q)
 		print(q)
 		return redirect(url_for('doctor.doctor_send_application'))

@@ -91,7 +91,7 @@ def reg():
 		email=request.form['email']
 		gen=request.form['gender']
 		pl=request.form['pl']
-		time=request.form['time']
+		# time=request.form['time']
 		i=request.files['img']
 		path='static/'+str(uuid.uuid4())+i.filename
 		i.save(path)
@@ -105,7 +105,7 @@ def reg():
 		q="insert into login values(null,'%s','%s','pending')"%(uname,pas)
 		id=insert(q)
 		print(q)
-		q="insert into doctor values(null,'%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','active',curdate(),'%s')"%(id,dept,fname,lname,place,phone,email,gen,place,time,path,src)
+		q="insert into doctor values(null,'%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','active',curdate(),'%s')"%(id,dept,fname,lname,place,phone,email,gen,pl,path,src)
 		insert(q)
 		flash("Registered successfully..!")
 		
